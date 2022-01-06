@@ -1,0 +1,35 @@
+produce = [
+    {"name": "ALU", "code": "AL", "type": "vegetable", "unit": "KG", "price": 500},
+    {
+        "name": "MOCHA",
+        "code": "MO",
+        "type": "vegetable",
+        "unit": "quantity",
+        "price": 200,
+    },
+    {
+        "name": "LEBU GANDHORAJ",
+        "code": "GL",
+        "type": "vegetable",
+        "unit": "quantity",
+        "price": 10,
+    },
+    {"name": "LEBU PATI", "code": "PA", "type": "vegetable", "unit": "KG", "price": 50},
+    {
+        "name": "DHONE PATA",
+        "code": "DP",
+        "type": "leafy vegetable",
+        "unit": "100 G",
+        "price": 50,
+    },
+    {
+        "name": "KOLMI SHAK",
+        "code": "KS",
+        "type": "leafy vegetable",
+        "unit": "250 G",
+        "price": 10,
+    },
+    {"name": "ADA", "code": "AD", "type": "spice", "unit": "100 G", "price": 50},
+    {"name": "TENTUL KANCHA", "code": "KT", "type": "spice", "unit": "KG", "price": 20},
+    {"name": "TENTUL PAKA", "code": "PT", "type": "spice", "unit": "KG", "price": 120},
+]
