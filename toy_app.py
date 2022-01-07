@@ -17,7 +17,7 @@ def make_app(df_produce):
     consumer_input = []
     for name, unit, price in zip(df_produce.ITEM, df_produce.UNIT, df_produce.PRICE):
         with st.container():
-            col1, col2 = st.columns([2, 1])
+            col1, col2 = st.columns(2)
             input_unit = col1.text_input(f'{name} (Rs. {price}/{unit})')
             if input_unit == "":
                 continue
