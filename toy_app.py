@@ -1,6 +1,15 @@
 import streamlit as st
 import pandas as pd
-from inventory import produce
+
+PRICE_TABLE = "Chetana_Marketing_v3.0.csv"
+
+
+def display_numbers(unit):
+    if unit in ["KG", "PIECE"]:
+        return 1, unit
+    elif "GM" in unit:
+        num, _ = unit.split()
+        return int(num), "GM"
 
 
 def make_app(df_input):
@@ -19,7 +28,9 @@ def make_app(df_input):
                 col1, col2 = st.columns(2)
                 input_unit = col1.number_input(f'{name} (Rs. {price}/{unit})', 0, 10)
                 total_price = input_unit * float(price)
-                col2.text(f"Rs. {total_price}")
+                display_quantity, display_unit = display_numbers(unit)
+                display_quantity *= input_unit
+                col2.text(f"Rs. {total_price}  [{display_quantity} {display_unit}]")
                 consumer_input.append({"name": name, "unit": input_unit, "unit_price": price})
 
     df_input = pd.DataFrame(consumer_input)
@@ -36,7 +47,7 @@ def make_app(df_input):
 
 def get_price_table():
     """Returns the weekly price table in a dataframe"""
-    df_market = pd.read_csv("Chetana_Marketing_v2.0.csv")
+    df_market = pd.read_csv(PRICE_TABLE)
     cols_select = ['CODE', 'সব্জি [VEGETABLES]', 'UNIT', 'PRICE']
     df_market = df_market.loc[:, cols_select]
     # df_market.columns = ['CODE', 'VEGETABLES', 'UNIT', 'PRICE']
