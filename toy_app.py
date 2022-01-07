@@ -3,25 +3,24 @@ import pandas as pd
 from inventory import produce
 
 
-def make_app(df_produce):
+def make_app(df_input):
     """Toy app"""
-    # prod = pd.DataFrame(produce)
 
     st.header("Available Items")
-    # cols_show = ["name", "unit", "price"]
-    # st.dataframe(df_produce.loc[:, cols_show])
-
     consumer_name = st.text_input('your name')
-    st.subheader("Select your items")
 
+    item_types = df_input.TYPE.unique()
     consumer_input = []
-    for name, unit, price in zip(df_produce.ITEM, df_produce.UNIT, df_produce.PRICE):
-        with st.container():
-            col1, col2 = st.columns(2)
-            input_unit = col1.number_input(f'{name} (Rs. {price}/{unit})', 0, 10)
-            total_price = input_unit * float(price)
-            col2.text(f"Rs. {total_price}")
-            consumer_input.append({"name": name, "unit": input_unit, "unit_price": price})
+    for item_type in item_types:
+        df_produce = df_input.loc[df_input.TYPE == item_type].copy()
+        st.subheader(f"{item_type}")
+        for name, unit, price in zip(df_produce.ITEM, df_produce.UNIT, df_produce.PRICE):
+            with st.container():
+                col1, col2 = st.columns(2)
+                input_unit = col1.number_input(f'{name} (Rs. {price}/{unit})', 0, 10)
+                total_price = input_unit * float(price)
+                col2.text(f"Rs. {total_price}")
+                consumer_input.append({"name": name, "unit": input_unit, "unit_price": price})
 
     df_input = pd.DataFrame(consumer_input)
     df_input["unit"] = pd.to_numeric(df_input["unit"]).fillna(0)
