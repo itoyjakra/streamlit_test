@@ -18,10 +18,8 @@ def make_app(df_produce):
     for name, unit, price in zip(df_produce.ITEM, df_produce.UNIT, df_produce.PRICE):
         with st.container():
             col1, col2 = st.columns(2)
-            input_unit = col1.text_input(f'{name} (Rs. {price}/{unit})')
-            if input_unit == "":
-                continue
-            total_price = int(input_unit) * float(price)
+            input_unit = col1.number_input(f'{name} (Rs. {price}/{unit})', 0, 10)
+            total_price = input_unit * float(price)
             col2.text(f"Rs. {total_price}")
             consumer_input.append({"name": name, "unit": input_unit, "unit_price": price})
 
